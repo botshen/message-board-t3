@@ -1,48 +1,29 @@
-import Link from "next/link";
-
- import { api, HydrateClient } from "~/trpc/server";
+import Image from "next/image";
+import { MessageBoard } from "~/app/_components/message";
+import { HydrateClient } from "~/trpc/server";
 
 export default async function Home() {
-  const hello = await api.post.hello({ text: "from tRPC" });
-
- 
   return (
     <HydrateClient>
-      <main className="flex min-h-screen flex-col items-center justify-center bg-gradient-to-b from-[#2e026d] to-[#15162c] text-white">
-        <div className="container flex flex-col items-center justify-center gap-12 px-4 py-16">
-          <h1 className="text-5xl font-extrabold tracking-tight sm:text-[5rem]">
-            Create <span className="text-[hsl(280,100%,70%)]">T3</span> App
-          </h1>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:gap-8">
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/usage/first-steps"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">First Steps →</h3>
-              <div className="text-lg">
-                Just the basics - Everything you need to know to set up your
-                database and authentication.
-              </div>
-            </Link>
-            <Link
-              className="flex max-w-xs flex-col gap-4 rounded-xl bg-white/10 p-4 hover:bg-white/20"
-              href="https://create.t3.gg/en/introduction"
-              target="_blank"
-            >
-              <h3 className="text-2xl font-bold">Documentation →</h3>
-              <div className="text-lg">
-                Learn more about Create T3 App, the libraries it uses, and how
-                to deploy it.
-              </div>
-            </Link>
+      <main className="min-h-screen bg-gradient-to-b from-[#B8E1FC] to-[#90C6FD]">
+        <div className="mx-auto max-w-4xl pt-12 px-4">
+          <div className="bg-white/90 backdrop-blur-sm rounded-xl shadow-lg border-2 border-[#7CB9E8] p-8">
+            <div className="flex items-center gap-3 mb-6">
+              <Image
+                src="/logo.jpeg"
+                alt="QQ Icon"
+                width={32}
+                height={32}
+              />
+              <h1 className="text-[#0066CC] text-2xl font-bold bg-gradient-to-r from-[#0066CC] to-[#66B2FF] bg-clip-text text-transparent">
+                QQ 留言板 ⭐️
+              </h1>
+            </div>
+            <div className="border-t-2 border-[#CCE6FF] pt-4">
+              <MessageBoard />
+            </div>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-2xl text-white">
-              {hello ? hello.greeting : "Loading tRPC query..."}
-            </p>
-          </div> 
-         </div>
+        </div>
       </main>
     </HydrateClient>
   );
