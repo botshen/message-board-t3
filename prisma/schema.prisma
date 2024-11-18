@@ -18,3 +18,32 @@ model Post {
 
     @@index([name])
 }
+
+model Message {
+    id        String    @id @default(cuid())
+    content   String
+    createdAt DateTime  @default(now())
+    deletedAt DateTime?
+    author    User      @relation(fields: [authorId], references: [id])
+    authorId  String
+    comments  Comment[]
+}
+
+model Comment {
+    id        String    @id @default(cuid())
+    content   String
+    createdAt DateTime  @default(now())
+    deletedAt DateTime?
+    author    User      @relation(fields: [authorId], references: [id])
+    authorId  String
+    message   Message   @relation(fields: [messageId], references: [id])
+    messageId String
+}
+
+model User {
+    id       String    @id @default(cuid())
+    name     String
+    email    String    @unique
+    messages Message[]
+    comments Comment[]
+}
