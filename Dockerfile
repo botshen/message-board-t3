@@ -7,11 +7,15 @@ WORKDIR /usr/src/app
 # 复制 package.json 和 pnpm-lock.yaml 文件到工作目录
 COPY package.json pnpm-lock.yaml ./
 
+RUN npm config set registry https://registry.npmmirror.com
+
 # 全局安装 pnpm
 RUN npm install -g pnpm
 
+RUN pnpm config set registry https://registry.npmmirror.com
+
 # 安装项目依赖
-RUN pnpm install
+RUN pnpm install 
 
 # 复制其他源代码文件到工作目录
 COPY . .
