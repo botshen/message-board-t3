@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { api } from "~/trpc/react";
 import Image from "next/image";
+import { formatDate } from '~/utils/date';
 
 export function MessageBoard() {
   const [content, setContent] = useState("");
@@ -80,8 +81,8 @@ export function MessageBoard() {
               <div className="flex-1 min-w-0">
                 <div className="flex items-center gap-2 text-sm">
                   <span className="font-medium text-purple-600">{message.author.name}</span>
-                  <span className="text-xs text-gray-500">
-                    {new Date(message.createdAt).toLocaleString()}
+                  <span className="text-xs text-gray-500" suppressHydrationWarning>
+                    {formatDate(new Date(message.createdAt))}
                   </span>
                 </div>
                 <p className="mt-1.5 text-sm break-words text-gray-700">{message.content}</p>
@@ -102,8 +103,8 @@ export function MessageBoard() {
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
                       <span className="text-xs font-medium text-purple-600">{comment.author.name}</span>
-                      <span className="text-xs text-gray-500">
-                        {new Date(comment.createdAt).toLocaleString()}
+                      <span className="text-xs text-gray-500" suppressHydrationWarning>
+                        {formatDate(new Date(comment.createdAt))}
                       </span>
                     </div>
                     <p className="mt-1 text-sm break-words text-gray-700">{comment.content}</p>

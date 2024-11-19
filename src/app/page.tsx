@@ -1,7 +1,9 @@
 import Image from "next/image";
 import { MessageBoard } from "~/app/_components/message";
 import { HydrateClient } from "~/trpc/server";
+export const dynamic = 'force-dynamic'
 
+ 
 export default async function Home() {
   return (
     <HydrateClient>
